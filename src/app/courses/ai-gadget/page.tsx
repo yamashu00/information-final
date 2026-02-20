@@ -1,4 +1,4 @@
-import { Bot, Camera, Cpu, Download, AlertTriangle, PlayCircle } from "lucide-react";
+import { Bot, Camera, Cpu, Download, AlertTriangle, PlayCircle, ExternalLink } from "lucide-react";
 
 export default function page() {
     return (
