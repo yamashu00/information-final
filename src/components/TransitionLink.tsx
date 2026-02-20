@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -13,7 +14,7 @@ export function TransitionLink({ href, children, className }: TransitionLinkProp
     const router = useRouter();
     const [isExiting, setIsExiting] = useState(false);
 
-    const handleClick = (e: React.MouseEvent) => {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         // If clicking same link, do nothing or normal behavior? 
         // Let's allow transition.
@@ -38,9 +39,9 @@ export function TransitionLink({ href, children, className }: TransitionLinkProp
                     }}
                 />
             )}
-            <a href={href} onClick={handleClick} className={className}>
+            <Link href={href} onClick={handleClick} className={className}>
                 {children}
-            </a>
+            </Link>
         </>
     );
 }

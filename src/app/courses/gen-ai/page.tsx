@@ -1,5 +1,5 @@
 import { PromptCard } from "@/components/PromptCard";
-import { Sparkles, Image, Code, MessageSquare } from "lucide-react";
+import { Sparkles, Image, Code, MessageSquare, ShieldCheck, BrainCircuit } from "lucide-react";
 
 export default function page() {
     return (
@@ -29,7 +29,7 @@ export default function page() {
                     </p>
                 </div>
 
-                {/* Challenge 1: Image Generation */}
+                {/* Round 1: Image Generation */}
                 <div className="space-y-6">
                     <div className="flex items-center space-x-3 mb-2">
                         <div className="p-2 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-lg">
@@ -53,7 +53,7 @@ export default function page() {
                     </div>
                 </div>
 
-                {/* Challenge 2: Coding */}
+                {/* Round 2: Coding */}
                 <div className="space-y-6">
                     <div className="flex items-center space-x-3 mb-2">
                         <div className="p-2 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-lg">
@@ -77,6 +77,36 @@ export default function page() {
 1つのHTMLファイルとしてコードブロックで出力してください。`}
                         description="「命令書」形式（Markdown）で、役割・要件・出力形式を明確に定義するのがコツです。"
                     />
+                </div>
+
+                {/* Round 3: Reasoning (Chain of Thought) */}
+                <div className="space-y-6">
+                    <div className="flex items-center space-x-3 mb-2">
+                        <div className="p-2 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-lg">
+                            <BrainCircuit className="w-6 h-6" />
+                        </div>
+                        <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Round 3: 複雑な推論</h2>
+                    </div>
+                    <PromptCard
+                        title="思考の連鎖 (Chain of Thought)"
+                        badExample="リンゴが5個あり、2個食べて、3個買いました。今いくつ？"
+                        prompt={`リンゴが5個あります。そこから2個食べました。そのあと、3個買いました。今、手元には何個ありますか？
+ステップバイステップで考えてください。`}
+                        description="「ステップバイステップで考えて」と付け加えるだけで、AIの計算ミスや論理ミスが激減します。"
+                    />
+                </div>
+
+                {/* Ethics Guide */}
+                <div className="bg-neutral-100 dark:bg-neutral-800 rounded-xl p-6 border-l-4 border-neutral-500">
+                    <h3 className="text-lg font-bold text-neutral-700 dark:text-neutral-300 mb-3 flex items-center">
+                        <ShieldCheck className="w-5 h-5 mr-2" />
+                        AI倫理チェック
+                    </h3>
+                    <ul className="list-disc list-inside space-y-2 text-sm text-neutral-600 dark:text-neutral-400">
+                        <li><strong>著作権：</strong> 特定のアーティストの画風を模倣したり、既存のキャラクターを生成して公開することは著作権侵害になる可能性があります。</li>
+                        <li><strong>フェイクニュース：</strong> 実在の人物が言っていないことを言わせたり、嘘の画像を作成して拡散してはいけません。</li>
+                        <li><strong>個人情報：</strong> プロンプトに自分や他人の名前、住所などの個人情報を入力してはいけません。</li>
+                    </ul>
                 </div>
 
             </div>

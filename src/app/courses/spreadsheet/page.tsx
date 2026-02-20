@@ -1,4 +1,4 @@
-import { FileSpreadsheet, Keyboard, TrendingUp, Search } from "lucide-react";
+import { FileSpreadsheet, Keyboard, TrendingUp, Search, Database } from "lucide-react";
 
 export default function page() {
     return (
@@ -16,7 +16,7 @@ export default function page() {
                 </div>
             </section>
 
-            <div className="max-w-5xl mx-auto px-4 -mt-10 relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="max-w-6xl mx-auto px-4 -mt-10 relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6">
 
                 {/* Main Content */}
                 <div className="md:col-span-2 space-y-6">
@@ -46,18 +46,50 @@ export default function page() {
                         </div>
                     </div>
 
-                    {/* Analysis */}
+                    {/* Analysis Pivot Table */}
                     <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 p-6 animate-fade-in" style={{ animationDelay: "200ms" }}>
                         <h2 className="text-xl font-bold mb-6 flex items-center text-teal-600 dark:text-teal-400">
                             <TrendingUp className="w-6 h-6 mr-2" />
                             データ分析の王様「ピボットテーブル」
                         </h2>
-                        <div className="prose dark:prose-invert text-sm">
-                            <p>
+                        <div className="prose dark:prose-invert text-sm max-w-none">
+                            <p className="mb-4">
                                 関数を一切使わずに、ドラッグ＆ドロップだけで「クラス別の平均点」や「月ごとの売上合計」などを一瞬で集計できる機能です。
-                                <br /><br />
-                                <strong>使い方：</strong> メニューの「挿入」→「ピボットテーブル」を選択。
                             </p>
+                            <div className="bg-neutral-100 dark:bg-neutral-950 p-4 rounded-lg border border-neutral-200 dark:border-neutral-800">
+                                <h4 className="font-bold mb-2">使い方手順</h4>
+                                <ol className="list-decimal list-inside space-y-2">
+                                    <li>データが含まれるセル範囲を選択する</li>
+                                    <li>メニューの<strong>「挿入」</strong> → <strong>「ピボットテーブル」</strong>をクリック</li>
+                                    <li>新しいシートが作成されるので、右側のサイドバーで操作：
+                                        <ul className="list-disc list-inside ml-4 mt-1 text-neutral-600 dark:text-neutral-400">
+                                            <li>「行」に分析したい項目（例：クラス）を追加</li>
+                                            <li>「値」に集計したい数値（例：点数）を追加</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Data Cleaning */}
+                    <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-sm border border-neutral-200 dark:border-neutral-800 p-6 animate-fade-in" style={{ animationDelay: "250ms" }}>
+                        <h2 className="text-xl font-bold mb-4 flex items-center text-teal-600 dark:text-teal-400">
+                            <Database className="w-6 h-6 mr-2" />
+                            データクレンジング（お掃除）
+                        </h2>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
+                            人からもらったデータが汚くて集計できない...そんな時に役立つテクニック。
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded">
+                                <code className="text-xs font-bold text-teal-600">=TRIM(A1)</code>
+                                <p className="text-xs mt-1">余計なスペース（空白）を削除</p>
+                            </div>
+                            <div className="bg-neutral-50 dark:bg-neutral-800 p-3 rounded">
+                                <code className="text-xs font-bold text-teal-600">データ &gt; 重複の削除</code>
+                                <p className="text-xs mt-1">同じデータが2回出てくるのを消す</p>
+                            </div>
                         </div>
                     </div>
 
@@ -83,6 +115,11 @@ export default function page() {
                         </ul>
                         <p className="mt-6 text-xs text-neutral-400 text-center">※MacはCmdキー</p>
                     </div>
+
+                    <a href="#" className="block bg-gradient-to-r from-teal-500 to-cyan-500 text-white rounded-xl shadow-lg p-6 text-center hover:opacity-90 transition-opacity">
+                        <span className="block font-bold text-lg mb-1">練習用データ</span>
+                        <span className="text-sm opacity-90">ダウンロード (CSV)</span>
+                    </a>
                 </div>
 
             </div>
