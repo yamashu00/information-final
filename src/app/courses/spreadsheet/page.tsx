@@ -141,6 +141,41 @@ export default function page() {
                                         />
                                     </div>
                                 </div>
+
+                                {/* Bonus */}
+                                <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/10 dark:to-orange-900/10 p-6 rounded-xl border border-amber-200 dark:border-amber-800/50">
+                                    <h3 className="text-lg font-bold mb-4 flex items-center text-amber-700 dark:text-amber-400">
+                                        <span className="bg-amber-500 text-white px-2 py-0.5 rounded text-xs mr-2 uppercase">Bonus</span>
+                                        おまけ：最強の分析「ピボットテーブル」に挑戦
+                                    </h3>
+                                    <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-6">
+                                        数式を使わずに一瞬で集計する機能です。
+                                    </p>
+                                    <ul className="space-y-4 text-sm">
+                                        <li className="flex items-start">
+                                            <span className="bg-amber-200 dark:bg-amber-800 text-amber-700 dark:text-amber-300 w-5 h-5 rounded-full flex items-center justify-center text-xs mt-0.5 mr-3 flex-shrink-0">1</span>
+                                            <p className="dark:text-neutral-200">データ全体（<span className="font-mono bg-white dark:bg-neutral-800 px-1 rounded">A1:J101</span>）を選択します。</p>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="bg-amber-200 dark:bg-amber-800 text-amber-700 dark:text-amber-300 w-5 h-5 rounded-full flex items-center justify-center text-xs mt-0.5 mr-3 flex-shrink-0">2</span>
+                                            <p className="dark:text-neutral-200">メニューの <span className="font-bold underline"> [挿入] &gt; [ピボットテーブル] </span> を選択。</p>
+                                        </li>
+                                        <li className="flex items-start">
+                                            <span className="bg-amber-200 dark:bg-amber-800 text-amber-700 dark:text-amber-300 w-5 h-5 rounded-full flex items-center justify-center text-xs mt-0.5 mr-3 flex-shrink-0">3</span>
+                                            <div className="space-y-2 dark:text-neutral-200">
+                                                <p>右側の設定パネルで以下のように配置してみてください：</p>
+                                                <div className="grid grid-cols-2 gap-2 bg-white/50 dark:bg-neutral-800/50 p-3 rounded-lg border border-amber-100 dark:border-amber-900/30">
+                                                    <div className="text-neutral-500 dark:text-neutral-400">行:</div>
+                                                    <div className="font-bold">カテゴリ</div>
+                                                    <div className="text-neutral-500 dark:text-neutral-400">値:</div>
+                                                    <div className="font-bold">合計金額 <span className="text-xs font-normal opacity-70">（集計方法は SUM）</span></div>
+                                                    <div className="text-neutral-500 dark:text-neutral-400">列:</div>
+                                                    <div className="font-bold">支払状況</div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
