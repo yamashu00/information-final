@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bot, Cpu, AlertTriangle, PlayCircle, ExternalLink, Camera, Settings, Code, Zap, CheckCircle2, Copy, Check, Info } from "lucide-react";
+import { Bot, Cpu, AlertTriangle, PlayCircle, ExternalLink, Camera, Settings, Code, Zap, CheckCircle2, Copy, Check, Info, Usb, MonitorPlay } from "lucide-react";
 
 export default function page() {
     return (
@@ -12,10 +12,10 @@ export default function page() {
                     <div className="inline-flex p-4 rounded-full bg-white/10 mb-6 backdrop-blur-sm">
                         <Bot className="w-12 h-12" />
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-bold mb-6">AI×ガジェット開発：魔法のデバイス</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6">AI×ガジェット制作：最終手順</h1>
                     <p className="text-xl opacity-90 max-w-2xl mx-auto">
-                        画像認識AIの力で、現実の世界を動かそう。
-                        カメラに映った「あなたの動き」をセンサーにする、IoTプログラミング体験。
+                        JavaScriptとシリアル通信を使って、AIの判定結果をmicro:bitに送ろう。
+                        拡張機能を使わずに、ブラウザとハードウェアを直接つなぐ高度な連携に挑戦。
                     </p>
                 </div>
             </section>
@@ -32,13 +32,13 @@ export default function page() {
                                     <Zap className="w-8 h-8" />
                                 </div>
                                 <div>
-                                    <span className="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">実践プロジェクト</span>
-                                    <h2 className="text-2xl font-bold">制作ガイド：AI連携デバイス</h2>
+                                    <span className="text-sm font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">実践編</span>
+                                    <h2 className="text-2xl font-bold">AIガジェット制作：最終手順（拡張機能なし版）</h2>
                                 </div>
                             </div>
                             <div className="flex items-center text-xs font-bold text-neutral-400">
                                 <Info className="w-4 h-4 mr-1 text-blue-500" />
-                                推奨時間: 50分
+                                推奨時間: 45分
                             </div>
                         </div>
 
@@ -47,16 +47,16 @@ export default function page() {
                             <ProjectStep
                                 number={1}
                                 icon={<Camera className="w-5 h-5 text-blue-500" />}
-                                title="AIモデルの学習 (Teachable Machine)"
-                                desc="GoogleのTeachable Machineを使って、カメラに映ったジェスチャーを学習させます。"
+                                title="Teachable Machine での準備"
+                                desc="PC側の「目（AI）」を完成させ、判定結果をクラウドから取得できるようにします。"
                                 details={[
-                                    "「画像プロジェクト」を選択し、「標準の画像モデル」を作成します。",
-                                    "クラス1（例：笑顔）とクラス2（例：真顔）にそれぞれ20枚以上の画像を学習させます。",
-                                    "「モデルをトレーニングする」をクリックして完了を待ちます。"
+                                    "カメラで「グー」と「パー」を20枚以上ずつ撮影し、トレーニングします。",
+                                    "「モデルをエクスポート」から「モデルをアップロード」を押し、URLをコピーします。",
+                                    "プレビュー画面で判定が「99%」など正しく出ているか確認します。"
                                 ]}
                                 checkItems={[
-                                    "クラス名を「笑顔」「真顔」などに変更した",
-                                    "トレーニングが100%完了した"
+                                    "クラス名を「Class 1」「Class 2」に設定した",
+                                    "モデルのアップロードが完了し、URLを取得した"
                                 ]}
                                 action={{ text: "Teachable Machine を開く", url: "https://teachablemachine.withgoogle.com/" }}
                             />
@@ -64,75 +64,96 @@ export default function page() {
                             {/* Step 2 */}
                             <ProjectStep
                                 number={2}
-                                icon={<Settings className="w-5 h-5 text-blue-500" />}
-                                title="モデルのエクスポートとURL取得"
-                                desc="学習したAIをプログラムから呼び出せるようにクラウドにアップロードします。"
+                                icon={<Code className="w-5 h-5 text-blue-500" />}
+                                title="MakeCode でのプログラミング"
+                                desc="JavaScriptモードを使用して、PCからのシリアル通信を受け取るプログラムを書きます。"
                                 details={[
-                                    "「モデルをエクスポートする」をクリックします。",
-                                    "「Tensorflow.js」タブを選択した状態で「モデルをアップロード」を押します。",
-                                    "「自分の共有可能なリンク」に表示されたURLをコピーします。"
+                                    "MakeCodeで「新しいプロジェクト」を作ります。",
+                                    "画面上部の「JavaScript」タブをクリックし、以下のコードを貼り付けます。"
                                 ]}
-                                codeSnippet="https://teachablemachine.withgoogle.com/models/XXXXXXX/"
-                                codeLabel="コピーするURLの形式"
+                                codeSnippet={`// PCのAI判定結果（シリアル通信）を受け取る処理
+serial.onDataReceived(serial.delimiters(Delimiters.NewLine), function () {
+    let line = serial.readLine()
+    
+    // AIが「Class 1（グー）」と判定したとき
+    if (line == "Class 1") {
+        basic.showIcon(IconNames.SmallSquare) // 小さい四角を表示
+    }
+    
+    // AIが「Class 2（パー）」と判定したとき
+    if (line == "Class 2") {
+        basic.showIcon(IconNames.Square)      // 大きい四角を表示
+    }
+})
+
+// 起動時に準備完了を表示
+basic.showString("AI READY")`}
+                                codeLabel="MakeCode JavaScriptコード"
+                                action={{ text: "MakeCode エディタを開く", url: "https://makecode.microbit.org/" }}
                             />
 
                             {/* Step 3 */}
                             <ProjectStep
                                 number={3}
-                                icon={<Code className="w-5 h-5 text-blue-500" />}
-                                title="micro:bit のプログラミング"
-                                desc="MakeCodeエディタを使って、AIの判定結果をハードウェアの動きに変換します。"
+                                icon={<Usb className="w-5 h-5 text-blue-500" />}
+                                title="micro:bit との連携（最重要）"
+                                desc="USB通信を使ってAIとmicro:bitを双方向につなぎます。"
                                 details={[
-                                    "「拡張機能」から『Teachable Machine』を検索して追加します。",
-                                    "「もし『笑顔』の確信度が90%以上なら...」という条件分岐を作成します。"
+                                    "「ダウンロード」横の「…」から「デバイスを接続する」を選び、micro:bitを選択します。",
+                                    "書き込み後、画面左側に現れる「コンソールを表示 デバイス」ボタンをクリックします。",
+                                    "これにより、PCの判定結果がUSBを通じてmicro:bitに送られ始めます。"
                                 ]}
                                 checkItems={[
-                                    "拡張機能「Teachable Machine」を追加した",
-                                    "「URLをセットする」ブロックに自分のURLを入れた"
+                                    "「AI READY」とmicro:bitに流れた",
+                                    "「コンソールを表示」ボタンが表示された"
                                 ]}
-                                codeSnippet={`// 笑顔を検知した時のロジック
-もし (確信度(笑顔) > 90) ならば
-    サーボ(P0) を 90度 にする
-そうでなければ
-    サーボ(P0) を 0度 にする`}
-                                codeLabel="主要なロジック"
-                                action={{ text: "MakeCode エディタを開く", url: "https://makecode.microbit.org/" }}
                             />
 
                             {/* Step 4 */}
                             <ProjectStep
                                 number={4}
-                                icon={<CheckCircle2 className="w-5 h-5 text-blue-500" />}
-                                title="ハードウェアの組み立てとテスト"
-                                desc="サーボモーターをmicro:bitに接続し、実際に動かしてみましょう。"
+                                icon={<MonitorPlay className="w-5 h-5 text-blue-500" />}
+                                title="最終テスト"
+                                desc="カメラに映る自分の動きに合わせて、micro:bitのLEDが反応するか確認しましょう。"
                                 details={[
-                                    "micro:bitの0番ピンにサーボモーターを接続します（茶色:GND, 赤:3V, 橙:P0）。",
-                                    "ブラウザ上の「Teachable Machine連携画面」で、カメラに向かって合図を出します。"
-                                ]}
-                                checkItems={[
-                                    "ピンの接続（GND/3V/P0）が正しい",
-                                    "電池ボックスのスイッチを入れた"
+                                    "カメラに「グー」を映す → micro:bitのLEDに「小さい四角」が出るか？",
+                                    "カメラに「パー」を映す → micro:bitのLEDに「大きい四角」が出るか？"
                                 ]}
                             />
                         </div>
                     </div>
 
-                    {/* Troubleshooting */}
-                    <div className="bg-amber-50 dark:bg-amber-900/10 rounded-xl border border-amber-200 dark:border-amber-800 p-6 animate-fade-in" style={{ animationDelay: "500ms" }}>
-                        <h3 className="text-lg font-bold text-amber-800 dark:text-amber-500 mb-4 flex items-center">
-                            <AlertTriangle className="w-5 h-5 mr-2" />
-                            うまくいかない時は？
+                    {/* Offline Alternative */}
+                    <div className="bg-blue-50 dark:bg-blue-900/10 rounded-xl border border-blue-200 dark:border-blue-800 p-6 animate-fade-in">
+                        <h3 className="text-lg font-bold text-blue-800 dark:text-blue-400 mb-4 flex items-center">
+                            <Info className="w-5 h-5 mr-2" />
+                            💡 もし「コンソール」ボタンが出ない場合
                         </h3>
-                        <div className="grid gap-4 text-sm text-amber-900 dark:text-amber-200">
-                            <div className="bg-white/50 dark:bg-black/20 p-3 rounded-lg">
-                                <p className="font-bold whitespace-nowrap mb-1">Q. カメラが有効になりません</p>
-                                <p className="opacity-80 leading-relaxed">ブラウザのアドレスバー横にある「鍵マーク」をクリックして、カメラの許可をオンにしてください。</p>
+                        <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-4 leading-relaxed">
+                            学校の環境制限でUSB通信が遮断されている場合は、以下の「人間AI連携」で課題を完成させてください。
+                        </p>
+                        <div className="space-y-4">
+                            <div className="bg-white/50 dark:bg-black/20 p-4 rounded-lg text-sm">
+                                <p className="font-bold mb-1">人間AI連携による解決</p>
+                                <p className="opacity-80">画面のAI判定を見て、<strong>自分でmicro:bitのAボタン（グー用）やBボタン（パー用）を押して</strong>LEDを切り替えるデモを行う。</p>
                             </div>
-                            <div className="bg-white/50 dark:bg-black/20 p-3 rounded-lg">
-                                <p className="font-bold whitespace-nowrap mb-1">Q. AIの判定が不安定です</p>
-                                <p className="opacity-80 leading-relaxed">背景がシンプルで、顔や手がはっきり映る場所で学習させてみてください。背景の変化も学習に影響します。</p>
+                            <div className="bg-white/50 dark:bg-black/20 p-4 rounded-lg text-sm border-l-4 border-blue-400">
+                                <p className="font-bold mb-1 italic">レポートへの記載例</p>
+                                <p className="opacity-80">「ネットワーク制限により拡張機能が使用できなかったため、JavaScriptのシリアル通信機能を用いてAI判定結果を反映させる仕組みを構築した」</p>
                             </div>
                         </div>
+                    </div>
+
+                    {/* Common Errors */}
+                    <div className="bg-amber-50 dark:bg-amber-900/10 rounded-xl border border-amber-200 dark:border-amber-800 p-6 animate-fade-in">
+                        <h3 className="text-lg font-bold text-amber-800 dark:text-amber-500 mb-3 flex items-center">
+                            <AlertTriangle className="w-5 h-5 mr-2" />
+                            エラー解決のヒント
+                        </h3>
+                        <ul className="list-disc list-inside space-y-2 text-sm text-amber-900 dark:text-neutral-200">
+                            <li><strong>判定が逆になる：</strong> Teachable MachineのClass 1とClass 2の設定がJavaScriptのコードと一致しているか確認してください。</li>
+                            <li><strong>読み込みが遅い：</strong> モデルの学習画像を撮りすぎている可能性があります（50枚程度で十分です）。</li>
+                        </ul>
                     </div>
                 </div>
 
@@ -141,29 +162,23 @@ export default function page() {
                     <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-lg p-6 border border-neutral-200 dark:border-neutral-800 sticky top-24 animate-fade-in">
                         <h2 className="text-xl font-bold mb-6 flex items-center text-blue-600 dark:text-blue-400">
                             <Cpu className="w-6 h-6 mr-2" />
-                            準備リスト
+                            必要なもの
                         </h2>
                         <ul className="space-y-4">
-                            <PreparationItem label="micro:bit 本体" checked />
-                            <PreparationItem label="サーボモーター (SG90)" checked />
-                            <PreparationItem label="拡張ボード（電源用）" checked />
-                            <PreparationItem label="Webカメラ付きパソコン" checked />
-                            <PreparationItem label="工作用テープ・段ボール" />
+                            <PreparationItem label="micro:bit 本体 / ケーブル" checked />
+                            <PreparationItem label="PC（Webカメラ内蔵）" checked />
+                            <PreparationItem label="MakeCode（JavaScriptモード）" checked />
+                            <PreparationItem label="Teachable Machine 連携用URL" />
                         </ul>
 
                         <div className="mt-10 pt-8 border-t border-neutral-200 dark:border-neutral-800">
                             <h3 className="font-bold mb-4 flex items-center text-sm text-neutral-500">
                                 <PlayCircle className="w-4 h-4 mr-2" />
-                                チュートリアル動画
+                                プログラミングの補足
                             </h3>
-                            <a href="https://www.youtube.com/watch?v=T2qQGqZxkD0" target="_blank" rel="noopener" className="block relative rounded-xl overflow-hidden group border border-neutral-200 dark:border-neutral-800">
-                                <div className="bg-neutral-950 aspect-video flex items-center justify-center">
-                                    <div className="bg-white/20 p-4 rounded-full group-hover:bg-red-600 transition-colors">
-                                        <PlayCircle className="w-8 h-8 text-white" />
-                                    </div>
-                                </div>
-                                <p className="text-[10px] text-neutral-500 p-2 text-center group-hover:text-blue-500 transition-colors bg-neutral-50 dark:bg-neutral-900 italic">Teachable Machine × micro:bit 解説動画</p>
-                            </a>
+                            <div className="space-y-2 text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                                <p>JavaScriptタブに切り替えて貼り付けた後、また「ブロック」に戻すこともできます。中身がどうブロックに変換されたか見てみましょう。</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -194,7 +209,7 @@ function ProjectStep({ number, icon, title, desc, details, checkItems, codeSnipp
     };
 
     return (
-        <div className="relative pl-12 border-l-2 border-slate-100 dark:border-neutral-800 pb-2">
+        <div className="relative pl-12 border-l-2 border-slate-100 dark:border-neutral-800 pb-2 animate-fade-in">
             <div className="absolute -left-[17px] top-0 w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-lg shadow-blue-500/20 z-10">
                 {number}
             </div>
@@ -225,15 +240,15 @@ function ProjectStep({ number, icon, title, desc, details, checkItems, codeSnipp
                                 <span>{codeLabel || 'CODE'}</span>
                                 {copied && <span className="text-green-500 transition-opacity">COPIED!</span>}
                             </div>
-                            <div className="relative group">
-                                <pre className="bg-neutral-900 text-blue-300 p-4 rounded-lg text-xs font-mono overflow-x-auto border border-white/5">
+                            <div className="relative group/code">
+                                <pre className="bg-neutral-900 text-blue-300 p-4 rounded-lg text-xs font-mono overflow-x-auto border border-white/5 leading-relaxed">
                                     {codeSnippet}
                                 </pre>
                                 <button
                                     onClick={handleCopy}
-                                    className="absolute right-2 top-2 p-1.5 bg-white/10 rounded-md hover:bg-white/20 transition-colors opacity-0 group-hover:opacity-100"
+                                    className="absolute right-2 top-2 p-2 bg-white/10 rounded-md hover:bg-white/20 transition-all opacity-0 group-hover/code:opacity-100"
                                 >
-                                    {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3 text-white" />}
+                                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-white" />}
                                 </button>
                             </div>
                         </div>
@@ -241,11 +256,10 @@ function ProjectStep({ number, icon, title, desc, details, checkItems, codeSnipp
 
                     {checkItems && (
                         <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800">
-                            <p className="text-xs font-bold text-neutral-400 mb-3 uppercase tracking-tighter">Check Point</p>
                             <div className="grid gap-2">
                                 {checkItems.map((item, i) => (
-                                    <div key={i} className="flex items-center text-xs text-neutral-500">
-                                        <div className="w-4 h-4 rounded border border-neutral-300 dark:border-neutral-700 mr-2 flex-shrink-0" />
+                                    <div key={i} className="flex items-center text-xs text-neutral-500 font-medium">
+                                        <div className="w-4 h-4 rounded border border-neutral-300 dark:border-neutral-700 mr-2 flex-shrink-0 bg-white dark:bg-neutral-900 shadow-inner" />
                                         {item}
                                     </div>
                                 ))}
