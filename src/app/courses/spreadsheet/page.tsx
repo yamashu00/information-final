@@ -1,4 +1,4 @@
-import { FileSpreadsheet, Keyboard, TrendingUp, Search, Calendar, Calculator, ExternalLink } from "lucide-react";
+import { FileSpreadsheet, Keyboard, Search, Calculator, ExternalLink } from "lucide-react";
 
 export default function page() {
     return (

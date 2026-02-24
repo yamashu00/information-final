@@ -1,21 +1,21 @@
 import { CourseCard } from "@/components/CourseCard";
-import { Bot, Hammer, FileQuestion, Sparkles, FileSpreadsheet } from "lucide-react";
+import { Bot, FileQuestion, Sparkles, FileSpreadsheet } from "lucide-react";
 
 export default function Home() {
   const courses = [
+    {
+      title: "業務効率化",
+      description: "目指せスプシマスター！将来役立つスプレッドシートの関数と裏ワザを習得。",
+      icon: <FileSpreadsheet className="w-8 h-8" />,
+      href: "/courses/spreadsheet",
+      color: "from-teal-500 to-cyan-500",
+    },
     {
       title: "AI×ガジェット開発",
       description: "画像認識AIを使って、ジェスチャーで動く魔法のデバイスを作ろう！micro:bitとAIの連携を体験。",
       icon: <Bot className="w-8 h-8" />,
       href: "/courses/ai-gadget",
       color: "from-blue-500 to-indigo-500",
-    },
-    {
-      title: "デジタルファブリケーション",
-      description: "3Dプリンタとレーザーカッターで「ミニ・スマートハウス」を建築。デジタル工作×プログラミング。",
-      icon: <Hammer className="w-8 h-8" />,
-      href: "/courses/digital-fab",
-      color: "from-orange-500 to-red-500",
     },
     {
       title: "入試・実力試し",
@@ -30,13 +30,6 @@ export default function Home() {
       icon: <Sparkles className="w-8 h-8" />,
       href: "/courses/gen-ai",
       color: "from-purple-500 to-pink-500",
-    },
-    {
-      title: "業務効率化",
-      description: "目指せスプシマスター！将来役立つスプレッドシートの関数と裏ワザを習得。",
-      icon: <FileSpreadsheet className="w-8 h-8" />,
-      href: "/courses/spreadsheet",
-      color: "from-teal-500 to-cyan-500",
     },
   ];
 

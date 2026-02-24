@@ -1,5 +1,5 @@
 import { PromptCard } from "@/components/PromptCard";
-import { Sparkles, Image, Code, MessageSquare, ShieldCheck, BrainCircuit } from "lucide-react";
+import { Sparkles, Image as ImageIcon, Code, ShieldCheck, BrainCircuit } from "lucide-react";
 
 export default function page() {
     return (
@@ -33,7 +33,7 @@ export default function page() {
                 <div className="space-y-6">
                     <div className="flex items-center space-x-3 mb-2">
                         <div className="p-2 bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 rounded-lg">
-                            <Image className="w-6 h-6" />
+                            <ImageIcon className="w-6 h-6" />
                         </div>
                         <h2 className="text-2xl font-bold text-neutral-900 dark:text-neutral-100">Round 1: 画像生成</h2>
                     </div>

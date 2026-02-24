@@ -9,11 +9,10 @@ import { TransitionLink } from "./TransitionLink";
 
 const navItems = [
     { name: "ホーム", path: "/" },
+    { name: "スプレッドシート", path: "/courses/spreadsheet" },
     { name: "AI×ガジェット", path: "/courses/ai-gadget" },
-    { name: "デジタル工作", path: "/courses/digital-fab" },
     { name: "共通テスト", path: "/courses/exam-challenge" },
     { name: "生成AI", path: "/courses/gen-ai" },
-    { name: "スプレッドシート", path: "/courses/spreadsheet" },
 ];
 
 export function Navbar() {

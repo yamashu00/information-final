@@ -1,4 +1,4 @@
-import { FileQuestion, ScrollText, Timer, Trophy, ExternalLink, Lightbulb } from "lucide-react";
+import { FileQuestion, ScrollText, ExternalLink, Lightbulb } from "lucide-react";
 
 export default function page() {
     return (
@@ -41,19 +41,6 @@ export default function page() {
                                 href="https://www.dnc.ac.jp/albums/abm.php?d=744&f=abm00003277.pdf&n=6-2-1_%E8%A9%A6%E4%BD%9C%E5%95%8F%E9%A1%8C%E3%80%8E%E6%83%85%E5%A0%B1%E2%85%A0%E3%80%8F%E2%80%BB%E4%BB%A4%E5%92%8C4%E5%B9%B412%E6%9C%8823%E6%97%A5%E4%B8%80%E9%83%A8%E4%BF%AE%E6%AD%A3.pdf"
                             />
                         </ul>
-                    </div>
-
-                    <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-lg border border-neutral-200 dark:border-neutral-800 p-6 animate-fade-in" style={{ animationDelay: "150ms" }}>
-                        <div className="flex items-center mb-4 text-green-600 dark:text-green-400">
-                            <Timer className="w-6 h-6 mr-2" />
-                            <h2 className="text-xl font-bold">タイムアタック</h2>
-                        </div>
-                        <p className="text-neutral-600 dark:text-neutral-400 mb-6 text-sm">
-                            制限時間内に基礎用語クイズに挑戦！
-                        </p>
-                        <button className="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg transition-colors shadow-md">
-                            クイズを開始する (Demo)
-                        </button>
                     </div>
                 </div>
 
@@ -104,17 +91,6 @@ export default function page() {
                             </div>
                         </div>
                     </div>
-
-                    <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl shadow-lg p-6 text-white text-center animate-fade-in" style={{ animationDelay: "300ms" }}>
-                        <h3 className="text-xl font-bold mb-2">まだ自信がない？</h3>
-                        <p className="mb-4 opacity-90">プログラミング基礎やデータ分析の基本を復習しよう</p>
-                        <div className="flex justify-center gap-4">
-                            <a href="/courses/spreadsheet" className="bg-white text-green-600 font-bold py-2 px-6 rounded-lg hover:bg-neutral-100 transition-colors">
-                                データ分析を復習
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
@@ -136,5 +112,5 @@ function PastExamLink({ title, subtitle, href }: { title: string, subtitle: stri
             </div>
             <ExternalLink className="w-4 h-4 text-neutral-400 group-hover:text-green-500 transition-colors" />
         </a>
-    )
+    );
 }

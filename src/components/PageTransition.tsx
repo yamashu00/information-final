@@ -8,12 +8,16 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
 
     useEffect(() => {
-        // Reset state on path change to ensure animation can play if needed, 
-        // though usually layout persists. 
-        // Actually, for the "Reveal" effect on mount/navigation complete:
-        setIsLoaded(false);
-        const timer = setTimeout(() => setIsLoaded(true), 100);
-        return () => clearTimeout(timer);
+        // Reset state on path change to ensure animation can play
+        let timer: NodeJS.Timeout;
+        const animationFrame = requestAnimationFrame(() => {
+            setIsLoaded(false);
+            timer = setTimeout(() => setIsLoaded(true), 50);
+        });
+        return () => {
+            cancelAnimationFrame(animationFrame);
+            if (timer) clearTimeout(timer);
+        };
     }, [pathname]);
 
     return (
