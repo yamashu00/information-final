@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation";
 import { TransitionLink } from "./TransitionLink";
 
 const navItems = [
-    { name: "ホーム", path: "/" },
+    { name: "Home", path: "/" },
     { name: "スプレッドシート", path: "/courses/spreadsheet" },
     { name: "AI×ガジェット", path: "/courses/ai-gadget" },
     { name: "共通テスト", path: "/courses/exam-challenge" },
