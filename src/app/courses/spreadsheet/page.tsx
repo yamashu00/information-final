@@ -1,4 +1,7 @@
-import { FileSpreadsheet, Keyboard, Search, Calculator, ExternalLink, Download } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { FileSpreadsheet, Keyboard, Search, Calculator, ExternalLink, Download, Copy, Check } from "lucide-react";
 
 export default function page() {
     return (
@@ -232,6 +235,31 @@ export default function page() {
     );
 }
 
+function FormulaBlock({ formula, className = "" }: { formula: string, className?: string }) {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopy = () => {
+        navigator.clipboard.writeText(formula);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <div className={`relative group/formula ${className}`}>
+            <code className="block bg-neutral-100 dark:bg-neutral-800 p-3 pr-12 rounded text-sm font-mono text-teal-700 dark:text-teal-300 border-l-4 border-teal-500 overflow-x-auto">
+                {formula}
+            </code>
+            <button
+                onClick={handleCopy}
+                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-md bg-white dark:bg-neutral-700 shadow-sm border border-neutral-200 dark:border-neutral-600 opacity-0 group-hover/formula:opacity-100 transition-opacity hover:bg-neutral-50 dark:hover:bg-neutral-600"
+                title="数式をコピー"
+            >
+                {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4 text-neutral-500" />}
+            </button>
+        </div>
+    );
+}
+
 function QuestionItem({ title, input, formula, point }: { title: string, input: string, formula: string, point?: string }) {
     return (
         <div className="space-y-3">
@@ -243,9 +271,7 @@ function QuestionItem({ title, input, formula, point }: { title: string, input: 
                 </div>
                 <div className="space-y-1">
                     <span className="text-xs text-neutral-400 uppercase tracking-widest font-bold">数式</span>
-                    <code className="block bg-neutral-100 dark:bg-neutral-800 p-3 rounded text-sm font-mono text-teal-700 dark:text-teal-300 border-l-4 border-teal-500">
-                        {formula}
-                    </code>
+                    <FormulaBlock formula={formula} />
                 </div>
                 {point && (
                     <div className="flex items-start text-xs text-neutral-500 bg-white dark:bg-neutral-900 p-2 rounded border border-dotted border-neutral-200 dark:border-neutral-700">
@@ -263,9 +289,7 @@ function FunctionItem({ name, desc, formula }: { name: string, desc: string, for
         <div className="border-b border-neutral-100 dark:border-neutral-800 last:border-0 pb-6 last:pb-0">
             <h3 className="font-bold text-lg mb-1">{name}</h3>
             <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-3">{desc}</p>
-            <code className="block bg-neutral-100 dark:bg-neutral-800 p-2 rounded text-xs font-mono text-teal-700 dark:text-teal-300">
-                {formula}
-            </code>
+            <FormulaBlock formula={formula} className="!border-l-0 !pl-0" />
         </div>
     )
 }
