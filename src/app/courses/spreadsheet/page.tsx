@@ -1,4 +1,4 @@
-import { FileSpreadsheet, Keyboard, Search, Calculator, ExternalLink } from "lucide-react";
+import { FileSpreadsheet, Keyboard, Search, Calculator, ExternalLink, Download } from "lucide-react";
 
 export default function page() {
     return (
@@ -21,53 +21,123 @@ export default function page() {
                 {/* Main Content */}
                 <div className="md:col-span-2 space-y-6">
 
-                    {/* Practical Task: School Festival Accounting */}
+                    {/* Practical Task */}
                     <div className="bg-white dark:bg-neutral-900 rounded-xl shadow-lg border-2 border-teal-500/20 p-8 animate-fade-in order-first md:order-none" style={{ animationDelay: "100ms" }}>
-                        <div className="flex items-center mb-6">
-                            <div className="p-3 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-full mr-4">
-                                <Calculator className="w-8 h-8" />
+                        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-neutral-100 dark:border-neutral-800">
+                            <div className="flex items-center mb-4 md:mb-0">
+                                <div className="p-3 bg-teal-100 dark:bg-teal-900/30 text-teal-600 dark:text-teal-400 rounded-full mr-4">
+                                    <Calculator className="w-8 h-8" />
+                                </div>
+                                <div>
+                                    <span className="text-sm font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider">実践課題</span>
+                                    <h2 className="text-2xl font-bold">記念祭（文化祭）会計報告：実技練習問題</h2>
+                                </div>
                             </div>
-                            <div>
-                                <span className="text-sm font-bold text-teal-600 dark:text-teal-400 uppercase tracking-wider">実践課題</span>
-                                <h2 className="text-2xl font-bold">記念祭（文化祭）会計報告を作ろう</h2>
-                            </div>
+                            <a
+                                href="https://docs.google.com/spreadsheets/d/1SwghfdIa5RsjYyvinRI5zgEyUksOgARa18J4plG0zco/copy"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-lg transition-all shadow-md hover:shadow-lg active:scale-95 group"
+                            >
+                                <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                                練習用シートをコピー
+                            </a>
                         </div>
 
-                        <div className="space-y-8">
-                            <p className="text-neutral-600 dark:text-neutral-400">
-                                クラスの模擬店で「何がいくら売れたか」「利益はいくらか」を計算するシートを作成します。
-                                これさえあれば、面倒な計算も一瞬で終わります！
+                        <div className="space-y-10">
+                            <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                                この問題は、100行のサンプルデータが入ったスプレッドシートを使って、実務で使えるスキルを身につけるためのものです。
                             </p>
 
-                            <div className="space-y-6">
-                                <StepItem
-                                    step={1}
-                                    title="データの入力（売上管理表）"
-                                    desc="A列に「品名」、B列に「単価」、C列に「販売数」を入力します。"
-                                    code={[
-                                        ["品名", "単価", "販売数", "売上小計"],
-                                        ["焼きそば", "300", "150", ""],
-                                        ["ジュース", "150", "200", ""],
-                                        ["フランクフルト", "200", "120", ""]
-                                    ]}
-                                />
-                                <StepItem
-                                    step={2}
-                                    title="計算式の入力（掛け算）"
-                                    desc="「売上小計」を求めます。D2セルに以下の式を入力し、下までコピー（オートフィル）します。"
-                                    formula="=B2*C2"
-                                />
-                                <StepItem
-                                    step={3}
-                                    title="経費の計算（引き算・合計）"
-                                    desc="材料費などの「経費」を引いて「純利益」を出します。SUM関数で合計を出してから引き算します。"
-                                    formula="=SUM(D2:D4) - 経費合計セル"
-                                />
-                                <StepItem
-                                    step={4}
-                                    title="グラフで可視化"
-                                    desc="品名と販売数を選択して「挿入 > グラフ」をクリック。一番売れた商品が一目でわかります！"
-                                />
+                            <div className="space-y-12">
+                                {/* Step 1 */}
+                                <div>
+                                    <h3 className="text-lg font-bold mb-6 flex items-center text-neutral-800 dark:text-neutral-100 italic">
+                                        <span className="bg-teal-500 text-white w-20 h-7 rounded-sm text-xs flex items-center justify-center not-italic mr-3 uppercase tracking-tighter">Step 1</span>
+                                        基本の集計（データの全体像を掴む）
+                                    </h3>
+                                    <div className="space-y-6 ml-4 border-l-2 border-teal-100 dark:border-teal-900 pl-6">
+                                        <QuestionItem
+                                            title="全支出の合計を出そう"
+                                            input="K3"
+                                            formula="=SUM(H2:H101)"
+                                            point="数値に「桁区切り（,）」を入れると見やすくなります。"
+                                        />
+                                        <QuestionItem
+                                            title="「飲食」カテゴリの項目数を数えよう"
+                                            input="K6"
+                                            formula='=COUNTIF(D2:D101, "飲食")'
+                                        />
+                                        <QuestionItem
+                                            title="1項目あたりの平均支出額を出そう"
+                                            input="K9"
+                                            formula="=AVERAGE(H2:H101)"
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Step 2 */}
+                                <div>
+                                    <h3 className="text-lg font-bold mb-6 flex items-center text-neutral-800 dark:text-neutral-100 italic">
+                                        <span className="bg-teal-500 text-white w-20 h-7 rounded-sm text-xs flex items-center justify-center not-italic mr-3 uppercase tracking-tighter">Step 2</span>
+                                        条件付き集計（グループ別集計）
+                                    </h3>
+                                    <div className="space-y-6 ml-4 border-l-2 border-teal-100 dark:border-teal-900 pl-6">
+                                        <QuestionItem
+                                            title="「1A (カフェ)」が使った合計金額を出そう"
+                                            input="K12"
+                                            formula='=SUMIF(C2:C101, "1A (カフェ)", H2:H101)'
+                                        />
+                                        <QuestionItem
+                                            title="「未払」の合計金額を出そう"
+                                            input="K15"
+                                            formula='=SUMIF(I2:I101, "未払", H2:H101)'
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Step 3 */}
+                                <div>
+                                    <h3 className="text-lg font-bold mb-6 flex items-center text-neutral-800 dark:text-neutral-100 italic">
+                                        <span className="bg-teal-500 text-white w-20 h-7 rounded-sm text-xs flex items-center justify-center not-italic mr-3 uppercase tracking-tighter">Step 3</span>
+                                        論理・判定（チェック機能の自動化）
+                                    </h3>
+                                    <div className="space-y-6 ml-4 border-l-2 border-teal-100 dark:border-teal-900 pl-6">
+                                        <QuestionItem
+                                            title="「高額支出」を自動判定しよう（L列）"
+                                            input="L3 に入力して L102 までコピー"
+                                            formula='=IF(H3>=10000, "★高額", "-")'
+                                        />
+                                        <QuestionItem
+                                            title="「支払いアラート」を作ろう（M列）"
+                                            input="M3 に入力して M102 までコピー"
+                                            formula='=IF(AND(I3="未払", H3>20000), "🚨即時支払", "OK")'
+                                            point='空欄（""）ではなく「OK」と出すことで、入力漏れを検知しやすくします。'
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Step 4 */}
+                                <div>
+                                    <h3 className="text-lg font-bold mb-6 flex items-center text-neutral-800 dark:text-neutral-100 italic">
+                                        <span className="bg-teal-500 text-white w-20 h-7 rounded-sm text-xs flex items-center justify-center not-italic mr-3 uppercase tracking-tighter">Step 4</span>
+                                        高度なデータ抽出
+                                    </h3>
+                                    <div className="space-y-6 ml-4 border-l-2 border-teal-100 dark:border-teal-900 pl-6">
+                                        <QuestionItem
+                                            title="参加している団体の一覧を抜き出そう（N列）"
+                                            input="N3"
+                                            formula="=UNIQUE(C2:C101)"
+                                            point="結果が下に伸びるため、N列の下の方は空けておいてください。"
+                                        />
+                                        <QuestionItem
+                                            title="「装飾」カテゴリだけのリストを抜き出そう（O列）"
+                                            input="O3"
+                                            formula='=FILTER(B2:H101, D2:D101="装飾")'
+                                            point="スピル範囲が他の問題と重ならないよう、右側（P列以降）に十分なスペースがある場所に配置してください。"
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -162,40 +232,30 @@ export default function page() {
     );
 }
 
-function StepItem({ step, title, desc, formula, code }: { step: number, title: string, desc: string, formula?: string, code?: string[][] }) {
+function QuestionItem({ title, input, formula, point }: { title: string, input: string, formula: string, point?: string }) {
     return (
-        <div className="flex gap-4">
-            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-teal-500 text-white flex items-center justify-center font-bold">
-                {step}
-            </div>
-            <div className="flex-1">
-                <h3 className="font-bold text-lg mb-1">{title}</h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm mb-2">{desc}</p>
-                {formula && (
-                    <code className="block bg-neutral-100 dark:bg-neutral-800 p-2 rounded text-sm font-mono text-teal-700 dark:text-teal-300 mb-2">
+        <div className="space-y-3">
+            <h4 className="font-bold text-neutral-800 dark:text-neutral-200">{title}</h4>
+            <div className="bg-neutral-50 dark:bg-neutral-950 p-4 rounded-lg border border-neutral-100 dark:border-neutral-800 space-y-3">
+                <div className="flex items-center text-sm">
+                    <span className="text-neutral-500 mr-2">入力セル:</span>
+                    <span className="font-mono bg-teal-50 dark:bg-teal-900/30 text-teal-700 dark:text-teal-400 px-2 py-0.5 rounded italic">{input}</span>
+                </div>
+                <div className="space-y-1">
+                    <span className="text-xs text-neutral-400 uppercase tracking-widest font-bold">数式</span>
+                    <code className="block bg-neutral-100 dark:bg-neutral-800 p-3 rounded text-sm font-mono text-teal-700 dark:text-teal-300 border-l-4 border-teal-500">
                         {formula}
                     </code>
-                )}
-                {code && (
-                    <div className="bg-neutral-100 dark:bg-neutral-800 rounded overflow-hidden text-xs">
-                        <table className="w-full text-left border-collapse">
-                            <tbody>
-                                {code.map((row, i) => (
-                                    <tr key={i} className={i === 0 ? "bg-neutral-200 dark:bg-neutral-700 font-bold" : ""}>
-                                        {row.map((cell, j) => (
-                                            <td key={j} className="p-2 border border-neutral-300 dark:border-neutral-600">
-                                                {cell}
-                                            </td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                </div>
+                {point && (
+                    <div className="flex items-start text-xs text-neutral-500 bg-white dark:bg-neutral-900 p-2 rounded border border-dotted border-neutral-200 dark:border-neutral-700">
+                        <span className="font-bold text-teal-500 mr-2">Point:</span>
+                        <p>{point}</p>
                     </div>
                 )}
             </div>
         </div>
-    )
+    );
 }
 
 function FunctionItem({ name, desc, formula }: { name: string, desc: string, formula: string }) {
